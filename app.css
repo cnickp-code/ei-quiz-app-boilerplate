@@ -43,6 +43,20 @@ label {
   padding-bottom: 10px;
 }
 
+.question {
+  display: block;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  width: 90vw;
+  max-width: 573px;
+  min-width: 300px;
+}
+
 .score {
   display: block;
   margin-left: auto;
@@ -64,17 +78,5 @@ label {
   margin-top: 8px;
 }
 
-.question {
-  display: block;
-  text-align: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 3px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid black;
-  width: 90vw;
-  max-width: 573px;
-  min-width: 300px;
-}
+
 
