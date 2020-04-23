@@ -8,14 +8,15 @@
 */
 
 header {
-  width: 100%;
+  margin-top: 150px;
 }
 
 h1 {
   text-align: center;
   min-width: 300px;
 }
-fieldset {
+
+.quiz-container {
   padding: 0px;
   margin: 0px;
 }
@@ -69,6 +70,43 @@ label {
 
 .answers {
   display: none;
+}
+
+.start-container {
+  padding: 5px;
+  margin: 0px;
+}
+
+.end-container {
+  padding: 5px;
+  margin: 0px;
+}
+
+.instructions {
+  
+}
+
+.instructions-body {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.results {
+  text-align: center;
+}
+
+.results-body {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.start-button {
+  margin-top: 10px;
+}
+
+.next-button {
+
 }
 
 .submit-button {
