@@ -12,7 +12,7 @@ const store = {
         'pink',
         'green'
       ],
-      correctAnswer: 'green'
+      correctAnswer: 3
     },
     {
       question: 'What is the current year?',
@@ -22,12 +22,13 @@ const store = {
         '2019',
         '2005'
       ],
-      correctAnswer: '2019'
+      correctAnswer: 2
     }
   ],
   questionNumber: 0,
   score: 0,
-  pageState: 0
+  pageState: 0,
+  result: ""
 };
 
 /**
@@ -66,9 +67,12 @@ function generateQuizPage(item) {
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-4" value="3">',
         '<label for="quiz-ans-4">', item.questions[item.questionNumber].answers[3], '</label>',
         '<br>',
-        '<button type="submit" class ="submit-button next-button">Submit</button>',
+        '<button type="submit" class="submit-button next-button">Submit</button>',
+        '<button class="continue-button hidden">Continue</button>',
       '</fieldset>',
-    '</form>'
+    '</form>',
+    
+    
   ];
 
   return quizStructure;
@@ -157,12 +161,34 @@ function handleStartButtonClicked() {
 function handleQuizButtonClicked() {
   $(document).on('submit', '#quiz-form', event => {
     event.preventDefault();
-    console.log("Quiz button pressed, handleQuizButtonClicked ran");
+    console.log("Quiz button   pressed, handleQuizButtonClicked ran");
 
     const val = $('input[name="quizanswer"]:checked').val();
     console.log(val);
+    
+    // Handle score
+
+
+    // Handle result
+
+    // Add hidden class to quiz button
+    $('.next-button').addClass('hidden').removeClass('submit-button');
+
+    // Remove hidden class from continue button
+    $('.continue-button').removeClass('hidden').addClass('submit-button');
+
+  });
+}
+
+// Continue button clicked
+function handleContinueButtonClicked() {
+  $(document).on('click', '#continue-button', event => {
+    console.log("Continue button pressed, handleContinueButtonClicked ran");
+
     // Increment question number on click
+    console.log(store.questionNumber);
     store.questionNumber++;
+    console.log(store.questionNumber);
 
     const questionNum = store.questionNumber;
     checkIfMax(questionNum);
@@ -200,6 +226,7 @@ function handleQuiz() {
   handleStartButtonClicked();
   handleQuizButtonClicked();
   handleEndButtonClicked();
+  handleContinueButtonClicked();
 }
 
 $(handleQuiz);
