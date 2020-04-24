@@ -69,8 +69,13 @@ label {
 }
 
 .answers {
-  display: none;
+  /* display: none; */
+  /* visibility: hidden; */
+  width: 0;
+  height: 0;
 }
+
+
 
 .hidden {
   display: none;
@@ -129,5 +134,24 @@ label {
   margin-right: auto;
   margin-top: 8px;
 }
+
+.quiz-label:hover {
+  background-color: black;
+  color: white;
+}
+
+.answers:focus + label {
+  background-color: black;
+  color: white;
+}
+
+/*.quiz-label::selection {
+  background-color: green;
+  color: white;
+}*/
+
+/* .quiz-container input[type='radio']:checked + label.quiz-label {
+  background-color: green;
+} */
 
 
