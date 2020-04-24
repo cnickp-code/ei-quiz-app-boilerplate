@@ -51,20 +51,20 @@ const store = {
 function generateQuizPage(item) {
   let quizStructure = [
     '<div class="score">Results go here O X O</div>',
-    '<div class="question">', item.questions[questionNumber].question, '</div>',
-    '<form>',
+    '<div class="question">', item.questions[item.questionNumber].question, '</div>',
+    '<form id="quiz-form">',
       '<fieldset class="quiz-container">',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-1" value="0" checked>',
-        '<label for="quiz-ans-1">', item.questions[questionNumber].answers[0], '</label>',
+        '<label for="quiz-ans-1">', item.questions[item.questionNumber].answers[0], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-2" value="1">',
-        '<label for="quiz-ans-2">', item.questions[questionNumber].answers[1], '</label>',
+        '<label for="quiz-ans-2">', item.questions[item.questionNumber].answers[1], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-3" value="2">',
-        '<label for="quiz-ans-3">', item.questions[questionNumber].answers[2], '</label>',
+        '<label for="quiz-ans-3">', item.questions[item.questionNumber].answers[2], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-2" value="3">',
-        '<label for="quiz-ans-2">', item.questions[questionNumber].answers[3], '</label>',
+        '<label for="quiz-ans-2">', item.questions[item.questionNumber].answers[3], '</label>',
         '<br>',
         '<button type="submit" class ="submit-button next-button">Submit</button>',
       '</fieldset>',
@@ -76,11 +76,11 @@ function generateQuizPage(item) {
 
 function generateStartPage(item) {
   let startStructure = [
-    '<form>',
+    '<form id="page-form">',
       '<fieldset class="start-container">',
         '<div class="instructions">Instructions:</div>',
           '<div class="instructions-body">Placeholder text for instructions</div>',
-        '<button type="submit" class ="submit-button start">Start Game</button>',
+        '<button type="submit" class ="submit-button start-button">Start Game</button>',
       '</fieldset>',
     '</form>'
   ];
@@ -90,11 +90,11 @@ function generateStartPage(item) {
 
 function generateEndPage(item) {
   let endStructure = [
-    '<form>',
+    '<form id="page-form">',
       '<fieldset class="end-container">',
         '<div class="results">Results:</div>',
           '<div class="results-body">Placeholder text for results</div>',
-        '<button type="submit" class ="submit-button start-button">Play Again</button>',
+        '<button type="submit" class ="submit-button end-button">Play Again</button>',
       '</fieldset>',
     '</form>'
   ];
@@ -126,6 +126,7 @@ function generatePageString(page) {
   return pageArray.join('');
 }
 
+// Render page function
 function renderPage() {
   console.log("Rendering page");
   
@@ -134,12 +135,38 @@ function renderPage() {
   $('main').html(pageString);
 }
 
+
+
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
 
+// Start button click
+function handleStartButtonClicked() {
+  $(document).on('submit', '#page-form', event => {
+    event.preventDefault();
+    console.log("Start button pressed, handleStartButtonClicked ran");
+    console.log(store.pageState);
+    store.pageState = 1;
+    console.log(store.pageState);
+    renderPage();
+  });
+}
+
+/*function handleQuizButtonClicked() {
+  $(document).on('submit', '#quiz-form', event => {
+    event.preventDefault();
+    console.log("Start button pressed, handleStartButtonClicked ran");
+    console.log(store.pageState);
+    store.pageState = 1;
+    console.log(store.pageState);
+    renderPage();
+  });
+}*/
+
 function handleQuiz() {
   renderPage();
+  handleStartButtonClicked();
 }
 
 $(handleQuiz);
