@@ -60,16 +60,16 @@ function generateQuizPage(item) {
     '<form id="quiz-form">',
       '<fieldset class="quiz-container">',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-1" value="0">',
-        '<label class="quiz-label before-selected" for="quiz-ans-1">', item.questions[item.questionNumber].answers[0], '</label>',
+        '<label class="quiz-label before-selected" id="label1" for="quiz-ans-1">', item.questions[item.questionNumber].answers[0], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-2" value="1">',
-        '<label class="quiz-label before-selected" for="quiz-ans-2">', item.questions[item.questionNumber].answers[1], '</label>',
+        '<label class="quiz-label before-selected" id="label2" for="quiz-ans-2">', item.questions[item.questionNumber].answers[1], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-3" value="2">',
-        '<label class="quiz-label before-selected" for="quiz-ans-3">', item.questions[item.questionNumber].answers[2], '</label>',
+        '<label class="quiz-label before-selected" id="label3" for="quiz-ans-3">', item.questions[item.questionNumber].answers[2], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-4" value="3">',
-        '<label class="quiz-label before-selected" for="quiz-ans-4">', item.questions[item.questionNumber].answers[3], '</label>',
+        '<label class="quiz-label before-selected" id="label4" for="quiz-ans-4">', item.questions[item.questionNumber].answers[3], '</label>',
         '<br>',
         '<button type="submit" class="submit-button next-button">Submit</button>',
         '<button class="continue-button hidden">Continue</button>',
@@ -176,7 +176,8 @@ function handleQuizButtonClicked() {
     console.log("Quiz button   pressed, handleQuizButtonClicked ran");
 
     const ans = $('input[name="quizanswer"]:checked').val();
-    console.log(ans);
+    console.log(typeof ans);
+    let index = Number(ans) + 1;
     
     if(ans == undefined) {
       alert('Must select an answer.');
@@ -186,12 +187,21 @@ function handleQuizButtonClicked() {
 
       // Launch feedback page
       handleFeedback();
+      console.log(`#label${index}`);
+      $(`#label${index}`).addClass('incorrect');
+
+      // Turn correct answer green no matter what
+      console.log(`#label${store.questions[store.questionNumber].correctAnswer}`);
+      $(`#label${store.questions[store.questionNumber].correctAnswer + 1}`).addClass('correct');
 
       // Remove quiz-label class to keep from highlighting label after submission
       $('.before-selected').removeClass('quiz-label');
 
       // Add hidden class to quiz button
       $('.next-button').addClass('hidden').removeClass('submit-button');
+
+      // Disable radio buttons
+      $('input[type=radio]').attr('disabled', true);
 
       // Remove hidden class from continue button
       $('.continue-button').removeClass('hidden').addClass('submit-button');
@@ -214,9 +224,6 @@ function handleContinueButtonClicked() {
     store.questionNumber++;
     console.log(store.questionNumber);
 
-    // Add quiz-label class back 
-    $('.before-selected').addClass('quiz-label');
-
     const questionNum = store.questionNumber;
     checkIfMax(questionNum);
 
@@ -232,6 +239,10 @@ function handleAnswer(num) {
 
   let answerValue = store.questions[store.questionNumber].correctAnswer;
   
+  
+
+  // Turn incorrect answer (if applicable) red.
+
 
   if(num == answerValue) {
     store.score++;
