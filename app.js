@@ -28,7 +28,7 @@ const store = {
   questionNumber: 0,
   score: 0,
   pageState: 0,
-  result: ""
+  result: []
 };
 
 /**
@@ -51,21 +51,21 @@ const store = {
 // These functions return HTML templates
 function generateQuizPage(item) {
   let quizStructure = [
-    '<div class="score">Results go here O X O</div>',
+    '<div class="score">', item.result.join(''), '</div>',
     '<div class="question">', item.questions[item.questionNumber].question, '</div>',
     '<form id="quiz-form">',
       '<fieldset class="quiz-container">',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-1" value="0" checked>',
-        '<label for="quiz-ans-1">', item.questions[item.questionNumber].answers[0], '</label>',
+        '<label class="quiz-label" for="quiz-ans-1">', item.questions[item.questionNumber].answers[0], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-2" value="1">',
-        '<label for="quiz-ans-2">', item.questions[item.questionNumber].answers[1], '</label>',
+        '<label class="quiz-label" for="quiz-ans-2">', item.questions[item.questionNumber].answers[1], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-3" value="2">',
-        '<label for="quiz-ans-3">', item.questions[item.questionNumber].answers[2], '</label>',
+        '<label class="quiz-label" for="quiz-ans-3">', item.questions[item.questionNumber].answers[2], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-4" value="3">',
-        '<label for="quiz-ans-4">', item.questions[item.questionNumber].answers[3], '</label>',
+        '<label class="quiz-label" for="quiz-ans-4">', item.questions[item.questionNumber].answers[3], '</label>',
         '<br>',
         '<button type="submit" class="submit-button next-button">Submit</button>',
         '<button class="continue-button hidden">Continue</button>',
@@ -97,7 +97,7 @@ function generateEndPage(item) {
     '<form id="end-form">',
       '<fieldset class="end-container">',
         '<div class="results">Results:</div>',
-          '<div class="results-body">Placeholder text for results</div>',
+          '<div class="results-body">You got ', store.score, ' out of ', store.questionNumber, '</div>',
         '<button type="submit" class ="submit-button end-button">Play Again</button>',
       '</fieldset>',
     '</form>'
@@ -163,13 +163,11 @@ function handleQuizButtonClicked() {
     event.preventDefault();
     console.log("Quiz button   pressed, handleQuizButtonClicked ran");
 
-    const val = $('input[name="quizanswer"]:checked').val();
-    console.log(val);
+    const ans = $('input[name="quizanswer"]:checked').val();
+    console.log(ans);
     
-    // Handle score
-
-
-    // Handle result
+    // Handle score and result from answer
+    handleAnswer(ans);
 
     // Add hidden class to quiz button
     $('.next-button').addClass('hidden').removeClass('submit-button');
@@ -182,7 +180,7 @@ function handleQuizButtonClicked() {
 
 // Continue button clicked
 function handleContinueButtonClicked() {
-  $(document).on('click', '#continue-button', event => {
+  $(document).on('click', '.continue-button', event => {
     console.log("Continue button pressed, handleContinueButtonClicked ran");
 
     // Increment question number on click
@@ -198,6 +196,19 @@ function handleContinueButtonClicked() {
 }
 
 // Check if answer was correct
+function handleAnswer(num) {
+  console.log("handleAnswer ran");
+  console.log(num);
+  console.log(store.questions[store.questionNumber].correctAnswer)
+  if(num == store.questions[store.questionNumber].correctAnswer) {
+    store.score++;
+    store.result.push('O');
+    console.log('Right!');
+  } else {
+    store.result.push('X');
+    console.log('Wrong :(');
+  }
+}
 
 
 // Check if at the end of questions
@@ -208,7 +219,6 @@ function checkIfMax(num) {
 }
 
 // End page button clicked
-
 function handleEndButtonClicked() {
   $(document).on('submit', '#end-form', event => {
     event.preventDefault();
@@ -216,6 +226,8 @@ function handleEndButtonClicked() {
 
     store.pageState = 0;
     store.questionNumber = 0;
+    store.score = 0;
+    store.result = [];
 
     renderPage();
   });
