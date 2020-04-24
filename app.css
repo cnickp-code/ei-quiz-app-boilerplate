@@ -72,6 +72,10 @@ label {
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .start-container {
   padding: 5px;
   margin: 0px;
@@ -106,7 +110,7 @@ label {
 }
 
 .end-button {
-  
+
 }
 
 .next-button {
