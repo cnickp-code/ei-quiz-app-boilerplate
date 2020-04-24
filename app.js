@@ -63,8 +63,8 @@ function generateQuizPage(item) {
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-3" value="2">',
         '<label for="quiz-ans-3">', item.questions[item.questionNumber].answers[2], '</label>',
         '<br>',
-        '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-2" value="3">',
-        '<label for="quiz-ans-2">', item.questions[item.questionNumber].answers[3], '</label>',
+        '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-4" value="3">',
+        '<label for="quiz-ans-4">', item.questions[item.questionNumber].answers[3], '</label>',
         '<br>',
         '<button type="submit" class ="submit-button next-button">Submit</button>',
       '</fieldset>',
@@ -90,7 +90,7 @@ function generateStartPage(item) {
 
 function generateEndPage(item) {
   let endStructure = [
-    '<form id="page-form">',
+    '<form id="end-form">',
       '<fieldset class="end-container">',
         '<div class="results">Results:</div>',
           '<div class="results-body">Placeholder text for results</div>',
@@ -122,7 +122,7 @@ function generatePageString(page) {
   } else if(pageVal === 2) {
     pageArray = generateEndPage(store);
   } 
-  console.log(pageArray);
+
   return pageArray.join('');
 }
 
@@ -131,7 +131,7 @@ function renderPage() {
   console.log("Rendering page");
   
   const pageString = generatePageString(store);
-  console.log(pageString);
+
   $('main').html(pageString);
 }
 
@@ -146,9 +146,9 @@ function handleStartButtonClicked() {
   $(document).on('submit', '#page-form', event => {
     event.preventDefault();
     console.log("Start button pressed, handleStartButtonClicked ran");
-    console.log(store.pageState);
+
     store.pageState = 1;
-    console.log(store.pageState);
+
     renderPage();
   });
 }
@@ -158,25 +158,48 @@ function handleQuizButtonClicked() {
   $(document).on('submit', '#quiz-form', event => {
     event.preventDefault();
     console.log("Quiz button pressed, handleQuizButtonClicked ran");
+
+    const val = $('input[name="quizanswer"]:checked').val();
+    console.log(val);
+    // Increment question number on click
     store.questionNumber++;
-    console.log(store.questionNumber);
 
     const questionNum = store.questionNumber;
-    console.log(questionNum);
-    if(questionNum >= store.questions.length) {
-      store.pageState = 2;
-    }
-    console.log(store.pageState);
+    checkIfMax(questionNum);
+
     renderPage();
   });
 }
 
-// 
+// Check if answer was correct
+
+
+// Check if at the end of questions
+function checkIfMax(num) {
+  if(num >= store.questions.length) {
+    store.pageState = 2;
+  }
+}
+
+// End page button clicked
+
+function handleEndButtonClicked() {
+  $(document).on('submit', '#end-form', event => {
+    event.preventDefault();
+    console.log("End button pressed, handleEndButtonClicked ran");
+
+    store.pageState = 0;
+    store.questionNumber = 0;
+
+    renderPage();
+  });
+}
 
 function handleQuiz() {
   renderPage();
   handleStartButtonClicked();
   handleQuizButtonClicked();
+  handleEndButtonClicked();
 }
 
 $(handleQuiz);
