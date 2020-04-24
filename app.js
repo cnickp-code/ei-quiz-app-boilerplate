@@ -153,20 +153,30 @@ function handleStartButtonClicked() {
   });
 }
 
-/*function handleQuizButtonClicked() {
+// Quiz button clicked
+function handleQuizButtonClicked() {
   $(document).on('submit', '#quiz-form', event => {
     event.preventDefault();
-    console.log("Start button pressed, handleStartButtonClicked ran");
-    console.log(store.pageState);
-    store.pageState = 1;
+    console.log("Quiz button pressed, handleQuizButtonClicked ran");
+    store.questionNumber++;
+    console.log(store.questionNumber);
+
+    const questionNum = store.questionNumber;
+    console.log(questionNum);
+    if(questionNum >= store.questions.length) {
+      store.pageState = 2;
+    }
     console.log(store.pageState);
     renderPage();
   });
-}*/
+}
+
+// 
 
 function handleQuiz() {
   renderPage();
   handleStartButtonClicked();
+  handleQuizButtonClicked();
 }
 
 $(handleQuiz);
