@@ -112,7 +112,7 @@ function generateEndPage(item) {
 function generatePageString(page) {
   console.log("Generating a page string element");
 
-  const pageVal = store.pageState;
+  const pageVal = page.pageState;
   let pageArray = [];
 
   if(pageVal === 0) {
@@ -121,11 +121,25 @@ function generatePageString(page) {
     pageArray = generateQuizPage(store);
   } else if(pageVal === 2) {
     pageArray = generateEndPage(store);
-  }
-
+  } 
+  console.log(pageArray);
   return pageArray.join('');
+}
+
+function renderPage() {
+  console.log("Rendering page");
+  
+  const pageString = generatePageString(store);
+  console.log(pageString);
+  $('main').html(pageString);
 }
 
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
+function handleQuiz() {
+  renderPage();
+}
+
+$(handleQuiz);
