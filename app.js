@@ -28,6 +28,7 @@ const store = {
   questionNumber: 0,
   score: 0,
   feedbackString: "",
+  // Page state: 0 - Start. 1 - Quiz. 2 - End.
   pageState: 0,
   result: []
 };
@@ -59,23 +60,21 @@ function generateQuizPage(item) {
     '<form id="quiz-form">',
       '<fieldset class="quiz-container">',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-1" value="0">',
-        '<label class="quiz-label label1" for="quiz-ans-1">', item.questions[item.questionNumber].answers[0], '</label>',
+        '<label class="quiz-label before-selected" for="quiz-ans-1">', item.questions[item.questionNumber].answers[0], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-2" value="1">',
-        '<label class="quiz-label label2" for="quiz-ans-2">', item.questions[item.questionNumber].answers[1], '</label>',
+        '<label class="quiz-label before-selected" for="quiz-ans-2">', item.questions[item.questionNumber].answers[1], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-3" value="2">',
-        '<label class="quiz-label label3" for="quiz-ans-3">', item.questions[item.questionNumber].answers[2], '</label>',
+        '<label class="quiz-label before-selected" for="quiz-ans-3">', item.questions[item.questionNumber].answers[2], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-4" value="3">',
-        '<label class="quiz-label label4" for="quiz-ans-4">', item.questions[item.questionNumber].answers[3], '</label>',
+        '<label class="quiz-label before-selected" for="quiz-ans-4">', item.questions[item.questionNumber].answers[3], '</label>',
         '<br>',
         '<button type="submit" class="submit-button next-button">Submit</button>',
         '<button class="continue-button hidden">Continue</button>',
       '</fieldset>',
     '</form>',
-    
-    
   ];
 
   return quizStructure;
@@ -188,6 +187,9 @@ function handleQuizButtonClicked() {
       // Launch feedback page
       handleFeedback();
 
+      // Remove quiz-label class to keep from highlighting label after submission
+      $('.before-selected').removeClass('quiz-label');
+
       // Add hidden class to quiz button
       $('.next-button').addClass('hidden').removeClass('submit-button');
 
@@ -211,6 +213,9 @@ function handleContinueButtonClicked() {
     console.log(store.questionNumber);
     store.questionNumber++;
     console.log(store.questionNumber);
+
+    // Add quiz-label class back 
+    $('.before-selected').addClass('quiz-label');
 
     const questionNum = store.questionNumber;
     checkIfMax(questionNum);
@@ -266,6 +271,7 @@ function handleEndButtonClicked() {
   });
 }
 
+// Main function launching all functionality
 function handleQuiz() {
   renderPage();
   handleStartButtonClicked();
