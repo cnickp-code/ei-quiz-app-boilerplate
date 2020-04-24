@@ -140,8 +140,18 @@ label {
   color: white;
 }
 
-.answers:focus + label {
+.answers:checked + label {
   background-color: black;
+  color: white;
+}
+
+.correct {
+  background-color: green;
+  color: white;
+}
+
+.incorrect {
+  background-color: red;
   color: white;
 }
 
