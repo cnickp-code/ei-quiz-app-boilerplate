@@ -27,6 +27,7 @@ const store = {
   ],
   questionNumber: 0,
   score: 0,
+  feedbackString: "",
   pageState: 0,
   result: []
 };
@@ -51,21 +52,23 @@ const store = {
 // These functions return HTML templates
 function generateQuizPage(item) {
   let quizStructure = [
-    '<div class="score">', item.result.join(''), '</div>',
-    '<div class="question">', item.questions[item.questionNumber].question, '</div>',
+    '<div class="upper-container">',
+      '<div class="score">', item.result.join(''), '</div>',
+      '<div class="question">', item.questions[item.questionNumber].question, '</div>',
+    '</div>',
     '<form id="quiz-form">',
       '<fieldset class="quiz-container">',
-        '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-1" value="0" checked>',
-        '<label class="quiz-label" for="quiz-ans-1">', item.questions[item.questionNumber].answers[0], '</label>',
+        '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-1" value="0">',
+        '<label class="quiz-label label1" for="quiz-ans-1">', item.questions[item.questionNumber].answers[0], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-2" value="1">',
-        '<label class="quiz-label" for="quiz-ans-2">', item.questions[item.questionNumber].answers[1], '</label>',
+        '<label class="quiz-label label2" for="quiz-ans-2">', item.questions[item.questionNumber].answers[1], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-3" value="2">',
-        '<label class="quiz-label" for="quiz-ans-3">', item.questions[item.questionNumber].answers[2], '</label>',
+        '<label class="quiz-label label3" for="quiz-ans-3">', item.questions[item.questionNumber].answers[2], '</label>',
         '<br>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-4" value="3">',
-        '<label class="quiz-label" for="quiz-ans-4">', item.questions[item.questionNumber].answers[3], '</label>',
+        '<label class="quiz-label label4" for="quiz-ans-4">', item.questions[item.questionNumber].answers[3], '</label>',
         '<br>',
         '<button type="submit" class="submit-button next-button">Submit</button>',
         '<button class="continue-button hidden">Continue</button>',
@@ -76,6 +79,16 @@ function generateQuizPage(item) {
   ];
 
   return quizStructure;
+}
+
+function generateFeedbackPage(item) {
+  let feedbackStructure = [
+    '<div class="score">', item.result.join(''), '</div>',
+    '<div class="question">', item.questions[item.questionNumber].question, '</div>',
+    '<div class="question">', store.feedbackString, '</div>'
+  ];
+  
+  return feedbackStructure;
 }
 
 function generateStartPage(item) {
@@ -166,16 +179,27 @@ function handleQuizButtonClicked() {
     const ans = $('input[name="quizanswer"]:checked').val();
     console.log(ans);
     
-    // Handle score and result from answer
-    handleAnswer(ans);
+    if(ans == undefined) {
+      alert('Must select an answer.');
+    } else {
+      // Handle score and result from answer
+      handleAnswer(ans);
 
-    // Add hidden class to quiz button
-    $('.next-button').addClass('hidden').removeClass('submit-button');
+      // Launch feedback page
+      handleFeedback();
 
-    // Remove hidden class from continue button
-    $('.continue-button').removeClass('hidden').addClass('submit-button');
+      // Add hidden class to quiz button
+      $('.next-button').addClass('hidden').removeClass('submit-button');
 
+      // Remove hidden class from continue button
+      $('.continue-button').removeClass('hidden').addClass('submit-button');
+    }
   });
+}
+
+// Handle feedback
+function handleFeedback() {
+  $('.upper-container').html(generateFeedbackPage(store).join(''));
 }
 
 // Continue button clicked
@@ -200,14 +224,23 @@ function handleAnswer(num) {
   console.log("handleAnswer ran");
   console.log(num);
   console.log(store.questions[store.questionNumber].correctAnswer)
-  if(num == store.questions[store.questionNumber].correctAnswer) {
+
+  let answerValue = store.questions[store.questionNumber].correctAnswer;
+  
+
+  if(num == answerValue) {
     store.score++;
-    store.result.push('O');
+    store.result.push('O ');
     console.log('Right!');
+    store.feedbackString = "You are correct!";
+
   } else {
-    store.result.push('X');
+    store.result.push('X ');
     console.log('Wrong :(');
+    store.feedbackString = `Wrong. The correct answer is ${store.questions[store.questionNumber].answers[answerValue]}.`;
   }
+
+  renderPage();
 }
 
 
