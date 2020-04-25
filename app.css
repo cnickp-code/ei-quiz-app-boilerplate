@@ -8,7 +8,10 @@
 */
 
 header {
-  margin-top: 150px;
+  margin-top: 200px;
+  background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(75, 147, 189));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 h1 {
@@ -16,9 +19,16 @@ h1 {
   min-width: 300px;
 }
 
-.quiz-container {
-  padding: 0px;
-  margin: 0px;
+
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  color: rgb(75, 147, 189);
+  background-image: url('media/grid.jpg');
+  background-color: black;
+  background-repeat: repeat-y; 
+  background-position: center;
+  background-size: cover;
 }
 
 form {
@@ -35,13 +45,14 @@ label {
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(75, 147, 189, 0.5);
   margin-top: 0;
   margin-bottom: 0;
   width: 100%;
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
+  cursor: pointer;
 }
 
 .question {
@@ -75,20 +86,32 @@ label {
   height: 0;
 }
 
-
-
 .hidden {
   display: none;
 }
 
 .start-container {
-  padding: 5px;
+  background: rgba(0, 14, 20, 0.8);
+  margin-top: 100px;
+  border: 1px solid rgb(75, 147, 189);
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.quiz-container {
+  background: rgba(0, 14, 20, 0.8);
+  border-radius: 25px;
+  border: 1px solid rgb(75, 147, 189);
+  padding: 10px;
   margin: 0px;
 }
 
 .end-container {
-  padding: 5px;
-  margin: 0px;
+  background: rgba(0, 14, 20, 0.8);
+  margin-top: 100px;
+  border: 1px solid rgb(75, 147, 189);
+  border-radius: 25px;
+  padding: 10px;
 }
 
 .instructions {
@@ -126,42 +149,45 @@ label {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 8px;
+  margin-top: 30px;
+  border: 2px solid rgb(75, 147, 189);
+  background: rgb(0, 0, 0);
+  font: inherit;
+  cursor: pointer;
+  color: rgb(75, 147, 189);
+  width: 80%;
+  font-size: large;
+}
+
+.submit-button:hover {
+  background-color: rgb(75, 147, 189);
+  color: white;
 }
 
 .continue-button {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 8px;
-}
-
-.quiz-label:hover {
-  background-color: black;
-  color: white;
+  margin-top: 30px;
 }
 
 .answers:checked + label {
-  background-color: black;
+  background-color: rgb(75, 147, 189);
   color: white;
 }
 
-.correct {
-  background-color: green;
+.quiz-label:hover {
+  background-color: rgb(75, 147, 189);
   color: white;
 }
 
 .incorrect {
-  background-color: red;
+  background-color: rgb(179, 4, 4);
   color: white;
 }
 
-/*.quiz-label::selection {
-  background-color: green;
+.correct {
+  background-color: rgb(3, 77, 3);
   color: white;
-}*/
-
-/* .quiz-container input[type='radio']:checked + label.quiz-label {
-  background-color: green;
-} */
+}
 
 
