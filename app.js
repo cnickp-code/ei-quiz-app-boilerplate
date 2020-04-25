@@ -5,32 +5,62 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      question: 'What color is broccoli?',
+      question: `What is Link's main weapon in Legend of Zelda: Ocarina of Time?`,
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        'Deku Stick',
+        'Master Sword',
+        'Biggoron Sword',
+        'Boomerang'
+      ],
+      correctAnswer: 1
+    },
+    {
+      question: 'Super Smash Bros. Melee has many classic moments, including the infamous Wombo Combo. During what tournament did this take place?',
+      answers: [
+        'Evo 2012',
+        'SCSA West Coast Circuit 2008',
+        'Dreamhack: Winter 2010',
+        'CFL Smackdown 29'
+      ],
+      correctAnswer: 1
+    },
+    {
+      question: `In an infamous Counter-Strike: Global Offensive update in 2017, Valve nerfed what aspect of the AWP within the game?`,
+      answers: [
+        'Raw damage',
+        'Scope speed',
+        'Jumping accuracy',
+        'Movement while scoped'
       ],
       correctAnswer: 3
     },
     {
-      question: 'What is the current year?',
+      question: `In World of Warcraft, given a focus on raiding (PVE), and an ilvl of greater than 440, what is the optimal stat priority of a Demon Hunter in Havoc Spec?`,
       answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
+        'Versatility > Crit/Haste > Agi > Mastery',
+        'Agi > Mastery > Versatility > Crit/Haste',
+        'Mastery > Crit/Haste > Versatility > Agi',
+        'Versatility > Agi > Mastery > Crit/Haste'
       ],
-      correctAnswer: 2
-    }
+      correctAnswer: 0
+    },
+    {
+      question: `In what year is Valve slated to release Half-Life 3?`,
+      answers: [
+        '2021',
+        '2022',
+        '2023',
+        'lol'
+      ],
+      correctAnswer: 3
+    },
   ],
   questionNumber: 0,
   score: 0,
-  feedbackString: "",
+  feedbackString: " ",
   // Page state: 0 - Start. 1 - Quiz. 2 - End.
   pageState: 0,
-  result: []
+  result: [' ']
 };
 
 /**
@@ -176,7 +206,7 @@ function handleQuizButtonClicked() {
     console.log("Quiz button   pressed, handleQuizButtonClicked ran");
 
     const ans = $('input[name="quizanswer"]:checked').val();
-    console.log(typeof ans);
+    let correctAns = Number(store.questions[store.questionNumber].correctAnswer);
     let index = Number(ans) + 1;
     
     if(ans == undefined) {
@@ -187,12 +217,13 @@ function handleQuizButtonClicked() {
 
       // Launch feedback page
       handleFeedback();
-      console.log(`#label${index}`);
+
+      // Turn incorrect answer red
       $(`#label${index}`).addClass('incorrect');
 
       // Turn correct answer green no matter what
-      console.log(`#label${store.questions[store.questionNumber].correctAnswer}`);
-      $(`#label${store.questions[store.questionNumber].correctAnswer + 1}`).addClass('correct');
+      // Override incorrect answer
+      $(`#label${correctAns + 1}`).addClass('correct');
 
       // Remove quiz-label class to keep from highlighting label after submission
       $('.before-selected').removeClass('quiz-label');
@@ -211,6 +242,7 @@ function handleQuizButtonClicked() {
 
 // Handle feedback
 function handleFeedback() {
+  
   $('.upper-container').html(generateFeedbackPage(store).join(''));
 }
 
@@ -238,19 +270,18 @@ function handleAnswer(num) {
   console.log(store.questions[store.questionNumber].correctAnswer)
 
   let answerValue = store.questions[store.questionNumber].correctAnswer;
-  
-  
 
-  // Turn incorrect answer (if applicable) red.
-
-
+  // If answer passed is correct, 
+  // Add to score, push an 'O' into result, return feedback
+  // If answer passed is incorrect,
+  // Only push an 'X' into result.
   if(num == answerValue) {
     store.score++;
     store.result.push('O ');
     console.log('Right!');
     store.feedbackString = "You are correct!";
 
-  } else {
+  } else { 
     store.result.push('X ');
     console.log('Wrong :(');
     store.feedbackString = `Wrong. The correct answer is ${store.questions[store.questionNumber].answers[answerValue]}.`;
