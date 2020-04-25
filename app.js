@@ -12,7 +12,8 @@ const store = {
         'Biggoron Sword',
         'Boomerang'
       ],
-      correctAnswer: 1
+      correctAnswer: 1,
+      category: 'Legend of Zelda'
     },
     {
       question: 'Super Smash Bros. Melee has many classic moments, including the infamous Wombo Combo. During what tournament did this take place?',
@@ -22,7 +23,8 @@ const store = {
         'Dreamhack: Winter 2010',
         'CFL Smackdown 29'
       ],
-      correctAnswer: 1
+      correctAnswer: 1,
+      category: 'Super Smash Bros'
     },
     {
       question: `In an infamous Counter-Strike: Global Offensive update in 2017, Valve nerfed what aspect of the AWP within the game?`,
@@ -32,7 +34,8 @@ const store = {
         'Jumping accuracy',
         'Movement while scoped'
       ],
-      correctAnswer: 3
+      correctAnswer: 3,
+      category: 'Counter-Strike: Global Offensive'
     },
     {
       question: `In World of Warcraft, given a focus on raiding (PVE), and an ilvl of greater than 440, what is the optimal stat priority of a Demon Hunter in Havoc Spec?`,
@@ -42,7 +45,8 @@ const store = {
         'Mastery > Crit/Haste > Versatility > Agi',
         'Versatility > Agi > Mastery > Crit/Haste'
       ],
-      correctAnswer: 0
+      correctAnswer: 0,
+      category: 'World of Warcraft'
     },
     {
       question: `In what year is Valve slated to release Half-Life 3?`,
@@ -52,7 +56,8 @@ const store = {
         '2023',
         'lol'
       ],
-      correctAnswer: 3
+      correctAnswer: 3,
+      category: 'Half-Life 2'
     },
   ],
   questionNumber: 0,
@@ -85,10 +90,11 @@ function generateQuizPage(item) {
   let quizStructure = [
     '<div class="upper-container">',
       '<div class="score">', item.result.join(''), '</div>',
-      '<div class="question">', item.questions[item.questionNumber].question, '</div>',
+      '<div class="question"> Category: ', item.questions[item.questionNumber].category, '</div>',
     '</div>',
     '<form id="quiz-form">',
       '<fieldset class="quiz-container">',
+        '<div class="inner">', item.questions[item.questionNumber].question, '</div>',
         '<input type="radio" name="quizanswer" class="answers" id="quiz-ans-1" value="0">',
         '<label class="quiz-label before-selected" id="label1" for="quiz-ans-1">', item.questions[item.questionNumber].answers[0], '</label>',
         '<br>',
@@ -115,8 +121,7 @@ function generateQuizPage(item) {
 function generateFeedbackPage(item) {
   let feedbackStructure = [
     '<div class="score">', item.result.join(''), '</div>',
-    '<div class="question">', item.questions[item.questionNumber].question, '</div>',
-    '<div class="question">', store.feedbackString, '</div>'
+    '<div class="question">', store.feedbackString, '</div>',
   ];
   
   return feedbackStructure;
@@ -141,7 +146,7 @@ function generateEndPage(item) {
     '<form id="end-form">',
       '<fieldset class="end-container">',
         '<div class="results">Results:</div>',
-          '<div class="results-body">You got ', store.score, ' out of ', store.questionNumber, '</div>',
+          '<div class="results-body">You got ', store.score, ' out of ', store.questionNumber, '!</div>',
         '<button type="submit" class ="submit-button end-button">Play Again</button>',
       '</fieldset>',
     '</form>'
@@ -212,7 +217,7 @@ function handleQuizButtonClicked() {
     let index = Number(ans) + 1;
     
     if(ans == undefined) {
-      alert('Must select an answer.');
+      alert('You must select an answer!');
     } else {
       // Handle score and result from answer
       handleAnswer(ans);
