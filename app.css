@@ -16,7 +16,6 @@
 main {
   display: flex;
   flex-direction: column;
-  padding-right: 8px;
 }
 
 header {
@@ -123,6 +122,11 @@ label {
   font: inherit;
   font-size: 20px;
   color: white;
+}
+
+.start-cat {
+  text-align: center;
+  color: rgb(185, 208, 230);
 }
 
 .answers {
@@ -265,6 +269,22 @@ label {
   }
 
   .question {
+    font-size: small;
+  }
+
+  .instructions {
+    font-size: small;
+  }
+
+  .instructions-body {
+    font-size: small;
+  }
+
+  .results {
+    font-size: small;
+  }
+
+  .results-body {
     font-size: small;
   }
 
