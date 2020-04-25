@@ -49,6 +49,39 @@ const store = {
       category: 'World of Warcraft'
     },
     {
+      question: `IIn an end-game situation (i.e. final three moving circles), what is the technique used to traverse high-ground position in order to conserve materials?`,
+      answers: [
+        'Walling',
+        'Larping',
+        'Flooring',
+        'Tarping'
+      ],
+      correctAnswer: 3,
+      category: 'Fortnite'
+    },
+    {
+      question: `Who holds the world record for the Minecraft any % set seed speed run?`,
+      answers: [
+        'TheeSizzler',
+        'Admiral_Stapler',
+        'Curcuit',
+        'Geosquare'
+      ],
+      correctAnswer: 0,
+      category: 'Minecraft'
+    },
+    {
+      question: `In February 2020, 'Limit' became the first U.S. guild in a decade to reach 'World First' in raiding. What was the name of the only other U.S. guild to achieve that feat and what raid instance did they conquer?`,
+      answers: [
+        'Method > Tempest Keep',
+        'Blood Legion > Heart of Fear',
+        'Midwinter > Siege of Orgrimmar',
+        'Mors Certa > Throne of Thunder'
+      ],
+      correctAnswer: 1,
+      category: 'World of Warcraft'
+    },
+    {
       question: `In what year is Valve slated to release Half-Life 3?`,
       answers: [
         '2021',
@@ -59,6 +92,7 @@ const store = {
       correctAnswer: 3,
       category: 'Half-Life 2'
     },
+    
   ],
   questionNumber: 0,
   score: 0,
