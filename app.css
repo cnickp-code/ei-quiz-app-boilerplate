@@ -8,8 +8,19 @@
 */
 
 /* Major Sections of Page */
+
+* {
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding-right: 8px;
+}
+
 header {
-  margin-top: 90px;
+  margin-top: 5%;
   background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(75, 147, 189));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -28,6 +39,8 @@ body {
 h1 {
   text-align: center;
   min-width: 300px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 form {
@@ -45,7 +58,7 @@ label {
   margin-left: auto;
   margin-right: auto;
   border: 1px solid rgba(75, 147, 189, 0.5);
-  margin-top: 0;
+  margin-top: 10px;
   margin-bottom: 0;
   width: 100%;
   text-align: center;
@@ -56,7 +69,6 @@ label {
 
 /* Classes of Page */
 .question {
-  display: block;
   background: rgba(0, 14, 20, 0.8);
   border: 1px solid rgb(75, 147, 189);
   color: rgb(185, 208, 230);
@@ -70,6 +82,12 @@ label {
   width: 90vw;
   max-width: 573px;
   min-width: 300px;
+}
+
+.inner {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .score {
@@ -138,12 +156,14 @@ label {
 
 .results {
   text-align: center;
+  color: rgb(185, 208, 230);
 }
 
 .results-body {
   margin-top: 30px;
   margin-bottom: 30px;
   text-align: center;
+  color: rgb(185, 208, 230);
 }
 
 .start-button {
@@ -162,7 +182,7 @@ label {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
+  margin-top: 15px;
   border: 2px solid rgb(75, 147, 189);
   padding: 10px;
   background: rgb(0, 0, 0);
@@ -186,7 +206,7 @@ label {
 .continue-button {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
+  margin-top: 15px;
 }
 
 .answers:checked + label {
@@ -209,4 +229,29 @@ label {
   color: white;
 }
 
+@media screen and (max-width: 330px) {
+  .inner {
+    font-size: small;
+  }
 
+  label {
+    font-size: small;
+  }
+
+  h1 {
+    font-size: x-large;
+  }
+
+  .score {
+    font-size: large;
+  }
+
+  .question {
+    font-size: small;
+  }
+
+  .inner {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+}
