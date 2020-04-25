@@ -107,6 +107,8 @@ function generateQuizPage(item) {
     '</form>',
   ];
 
+
+
   return quizStructure;
 }
 
@@ -125,7 +127,7 @@ function generateStartPage(item) {
     '<form id="page-form">',
       '<fieldset class="start-container">',
         '<div class="instructions">Instructions:</div>',
-          '<div class="instructions-body">Placeholder text for instructions</div>',
+          '<div class="instructions-body">A light-hearted, fun check to see how much you know about the wide world of video games! Laugh! Enjoy!</div>',
         '<button type="submit" class ="submit-button start-button">Start Game</button>',
       '</fieldset>',
     '</form>'
@@ -242,7 +244,7 @@ function handleQuizButtonClicked() {
 
 // Handle feedback
 function handleFeedback() {
-  
+
   $('.upper-container').html(generateFeedbackPage(store).join(''));
 }
 
@@ -252,9 +254,7 @@ function handleContinueButtonClicked() {
     console.log("Continue button pressed, handleContinueButtonClicked ran");
 
     // Increment question number on click
-    console.log(store.questionNumber);
     store.questionNumber++;
-    console.log(store.questionNumber);
 
     const questionNum = store.questionNumber;
     checkIfMax(questionNum);
