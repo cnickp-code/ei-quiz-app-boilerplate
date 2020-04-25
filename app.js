@@ -129,8 +129,12 @@ function generateFeedbackPage(item) {
 
 function generateStartPage(item) {
   let startStructure = [
+    '<div class="upper-container">',
+      '<div class="score-begin">Score</div>',
+      '<div class="question"> Category</div>',
+    '</div>',
     '<form id="page-form">',
-      '<fieldset class="start-container">',
+      '<fieldset class="quiz-container">',
         '<div class="instructions">Instructions:</div>',
           '<div class="instructions-body">A light-hearted, fun check to see how much you know about the wide world of video games! Laugh! Enjoy!</div>',
         '<button type="submit" class ="submit-button start-button">Start Game</button>',
@@ -143,10 +147,14 @@ function generateStartPage(item) {
 
 function generateEndPage(item) {
   let endStructure = [
+    '<div class="upper-container">',
+    '<div class="score">', item.result.join(''), '</div>',
+      '<div class="question">Results!</div>',
+    '</div>',
     '<form id="end-form">',
-      '<fieldset class="end-container">',
-        '<div class="results">Results:</div>',
-          '<div class="results-body">You got ', store.score, ' out of ', store.questionNumber, '!</div>',
+      '<fieldset class="quiz-container">',
+          '<div class="results-body">You got ', store.score, ' out of ', store.questionNumber, ' correct!</div>',
+          '<div class="results-body">Pro tip: Get some sun and exercise... IRL.</div>',
         '<button type="submit" class ="submit-button end-button">Play Again</button>',
       '</fieldset>',
     '</form>'
