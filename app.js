@@ -49,7 +49,7 @@ const store = {
       category: 'World of Warcraft'
     },
     {
-      question: `IIn an end-game situation (i.e. final three moving circles), what is the technique used to traverse high-ground position in order to conserve materials?`,
+      question: `In an end-game situation (i.e. final three moving circles), what is the technique used to traverse high-ground position in order to conserve materials?`,
       answers: [
         'Walling',
         'Larping',
