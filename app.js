@@ -122,10 +122,10 @@ const store = {
 // These functions return HTML templates
 function generateQuizPage(item) {
   let quizStructure = [
-    '<div class="upper-container">',
+    '<section>',
       '<div class="score">', item.result.join(''), '</div>',
-      '<div class="question"> Category: ', item.questions[item.questionNumber].category, '</div>',
-    '</div>',
+      '<div class="category"> Category: ', item.questions[item.questionNumber].category, '</div>',
+    '</section>',
     '<form id="quiz-form">',
       '<fieldset class="quiz-container">',
         '<div class="inner">', item.questions[item.questionNumber].question, '</div>',
@@ -153,7 +153,7 @@ function generateQuizPage(item) {
 function generateFeedbackPage(item) {
   let feedbackStructure = [
     '<div class="score">', item.result.join(''), '</div>',
-    '<div class="question">', store.feedbackString, '</div>',
+    '<div class="category">', store.feedbackString, '</div>',
   ];
   
   return feedbackStructure;
@@ -161,10 +161,10 @@ function generateFeedbackPage(item) {
 
 function generateStartPage(item) {
   let startStructure = [
-    '<div class="upper-container">',
+    '<section>',
       '<div class="score">Score</div>',
-      '<div class="question"> Category</div>',
-    '</div>',
+      '<div class="category"> Category</div>',
+    '</section>',
     '<form id="page-form">',
       '<fieldset class="quiz-container">',
         '<div class="instructions">Instructions:</div>',
@@ -179,10 +179,10 @@ function generateStartPage(item) {
 
 function generateEndPage(item) {
   let endStructure = [
-    '<div class="upper-container">',
+    '<section>',
     '<div class="score">', item.result.join(''), '</div>',
-      '<div class="question">Results!</div>',
-    '</div>',
+      '<div class="category">Results!</div>',
+    '</section>',
     '<form id="end-form">',
       '<fieldset class="quiz-container">',
           '<div class="results-body">You got ', store.score, ' out of ', store.questionNumber, ' correct!</div>',
