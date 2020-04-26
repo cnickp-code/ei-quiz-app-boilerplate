@@ -99,7 +99,7 @@ const store = {
   feedbackString: " ",
   // Page state: 0 - Start. 1 - Quiz. 2 - End.
   pageState: 0,
-  result: [' ']
+  result: [`[ 1 ]`,`[ 2 ]`,`[ 3 ]`,`[ 4 ]`,`[ 5 ]`,`[ 6 ]`,`[ 7 ]`,`[ 8 ]`]
 };
 
 /**
@@ -320,12 +320,12 @@ function handleAnswer(num) {
   // Only push an 'X' into result.
   if(num == answerValue) {
     store.score++;
-    store.result.push('O ');
+    store.result[store.questionNumber] = '[ O ]';
     console.log('Right!');
     store.feedbackString = "You are correct!";
 
   } else { 
-    store.result.push('X ');
+    store.result[store.questionNumber] = '[ X ]';
     console.log('Wrong :(');
     store.feedbackString = `Wrong. The correct answer is ${store.questions[store.questionNumber].answers[answerValue]}.`;
   }
@@ -350,7 +350,7 @@ function handleEndButtonClicked() {
     store.pageState = 0;
     store.questionNumber = 0;
     store.score = 0;
-    store.result = [];
+    store.result = [`[ 1 ]`,`[ 2 ]`,`[ 3 ]`,`[ 4 ]`,`[ 5 ]`,`[ 6 ]`,`[ 7 ]`,`[ 8 ]`];
 
     renderPage();
   });
