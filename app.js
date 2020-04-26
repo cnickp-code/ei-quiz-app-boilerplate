@@ -147,8 +147,6 @@ function generateQuizPage(item) {
     '</form>',
   ];
 
-
-
   return quizStructure;
 }
 
@@ -164,7 +162,7 @@ function generateFeedbackPage(item) {
 function generateStartPage(item) {
   let startStructure = [
     '<div class="upper-container">',
-      '<div class="score-begin">Score</div>',
+      '<div class="score">Score</div>',
       '<div class="question"> Category</div>',
     '</div>',
     '<form id="page-form">',
@@ -313,8 +311,6 @@ function handleContinueButtonClicked() {
 // Check if answer was correct
 function handleAnswer(num) {
   console.log("handleAnswer ran");
-  console.log(num);
-  console.log(store.questions[store.questionNumber].correctAnswer)
 
   let answerValue = store.questions[store.questionNumber].correctAnswer;
 
