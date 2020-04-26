@@ -180,7 +180,7 @@ function generateStartPage(item) {
 function generateEndPage(item) {
   let endStructure = [
     '<section>',
-    '<div class="score">', item.result.join(''), '</div>',
+      '<div class="score">', item.result.join(''), '</div>',
       '<div class="category">Results!</div>',
     '</section>',
     '<form id="end-form">',
