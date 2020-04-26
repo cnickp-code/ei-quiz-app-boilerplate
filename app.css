@@ -68,7 +68,7 @@ label {
 }
 
 /* Classes of Page */
-.question {
+.category {
   background: rgba(0, 14, 20, 0.8);
   border: 1px solid rgb(75, 147, 189);
   color: rgb(185, 208, 230);
@@ -173,14 +173,6 @@ label {
 
 .start-button {
   margin-top: 10px;
-}
-
-.end-button {
-
-}
-
-.next-button {
-
 }
 
 .submit-button {
